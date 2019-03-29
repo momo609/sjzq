@@ -12,7 +12,13 @@ public class AnswerModel {
 	private String Unfocus;
 	private String Appear;
 	private String UserAnswer;
-	
+	private int LookBackTime;
+	public int getLookBackTime() {
+		return LookBackTime;
+	}
+	public void setLookBackTime(int lookBackTime) {
+		LookBackTime = lookBackTime;
+	}
 	public int getID() {
 		return ID;
 	}

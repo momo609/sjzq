@@ -74,6 +74,29 @@ public class analyzeknowledge {
 			//System.out.println("testid.length "+testids.size());
 			return paperid;
 	  }
+		public float[] getAvgLookbacktimeOfEachQuestion(ArrayList<ProcessedAnswerModel>testresult)
+		{
+			float avglookbacktime[] = new float[56];
+			for (int h=0;h<testresult.size();h++)
+			{
+//				System.out.println(s);
+		        String s=testresult.get(h).getLookBackTime();
+				String eachbacktime[]=s.split(",");
+				//System.out.println(eachbacktime.length);
+				for(int i=0;i<eachbacktime.length;i++)
+				{
+					avglookbacktime[i]=avglookbacktime[i]+(float)Integer.parseInt(eachbacktime[i]);
+				}
+			}
+			for(int i=0;i<avglookbacktime.length;i++)
+			{
+				float a=avglookbacktime[i];
+				//System.out.println(avglookbacktime[i]);
+				avglookbacktime[i]=a/testresult.size();
+			}
+			return avglookbacktime;
+			
+		}
    public static void main(String args[]) throws UnsupportedEncodingException, IOException{
 	   String concepts[]={"函数依赖","部分函数依赖","传递函数依赖","1NF","2NF","3NF","BCNF","决定因素","码","主属性","非主属性"};
 	   int question[][]=new int[56][11];
@@ -86,11 +109,11 @@ public class analyzeknowledge {
 		   conceptsorder.put(concepts[i], i);
 	   }
 	   analyzeknowledge dao=new analyzeknowledge();
-	   
-	   int testid;
+	   int testid=19;
+	   ArrayList<ProcessedAnswerModel>testresults=new ProcessingData().processingdata(testid);
 	   List <Double> avgTimeList=dao.getAvgTimeOfEachQuestion(testid);
 	   
-	   float[] avgLookbacktimes=dao.getAvgLookbacktimeOfEachQuestion(testid); //每道题的平均回看次数
+	   float[] avgLookbacktimes=dao.getAvgLookbacktimeOfEachQuestion(testresults); //每道题的平均回看次数
 	   
 	   int order=0;
 	  
@@ -100,7 +123,7 @@ public class analyzeknowledge {
 	   for(int j=0;j<testresults.size();j++)
 	   {
 		    resultsss="";
-			int paperid=dao.GetPaperidByTest(testresults.get(j).gettestid());
+			int paperid=dao.GetPaperidByTest(testresults.get(j).getTestID());
 			QuestionGetByPaper questionDaoImpl=new QuestionGetByPaper();
 			
 			PaperModel DBfindPaper_result = questionDaoImpl.DBfindPaper(paperid);
@@ -121,13 +144,13 @@ public class analyzeknowledge {
 			}
 			ArrayList<QuestionModel> qlist = questionDaoImpl.DBfindQuestions(questionList);
 			
-			List<QuestionModel>collectlist=questionDaoImpl.getMarkedQuestions(testresults.get(j).getStudentid(), 1);
+	//		List<QuestionModel>collectlist=questionDaoImpl.getMarkedQuestions(testresults.get(j).getUserID(), 1);
 			 
 			
-			String[] answers=testresults.get(j).getAnswers().split("@@");
-			String[] timeused=testresults.get(j).getTime_used().split(",");
-			String[] lookbacktimes=testresults.get(j).getLook_back_times().split(",");
-			String[] answertrace=testresults.get(j).getAnswer_trace().split(",");
+			String[] answers=testresults.get(j).getUserAnswer().split("@@");
+			String[] timeused=testresults.get(j).getTimeUsed().split(",");
+			String[] lookbacktimes=testresults.get(j).getLookBackTime().split(",");
+			String[] answertrace=testresults.get(j).getTrack().split(",");
 			String[] judgetime=new String[timeused.length];
 			String[] judgelookback=new String[lookbacktimes.length];
 			int[] countanswer=new int[56];
@@ -190,7 +213,7 @@ public class analyzeknowledge {
 				s.replaceAll("\\?", " "); 
 				s=s.trim();
 				System.out.println(qlist.get(i).getKnowledgepoint());
-				String path="/"+testresults.get(j).getStudentid()+"/";
+				String path="/"+testresults.get(j).getUserID()+"/";
 				  File file=new File(path);
 			        if(!file.exists()){
 			        	file.mkdirs();

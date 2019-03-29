@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DBConn {
 	private static final String DRIVER="com.mysql.jdbc.Driver";
-	private static final String URL="jdbc:mysql://172.16.34.91/sjzg?characterEncoding=UTF-8";
+	private static final String URL="jdbc:mysql://172.16.34.91/sjzq_personal?characterEncoding=UTF-8";
 	private static final String USER="root";
 	private static final String PASSWORD="a7682318";
 

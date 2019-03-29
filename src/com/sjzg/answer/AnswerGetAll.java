@@ -21,7 +21,7 @@ public class AnswerGetAll {
 
 	public ArrayList<AnswerModel> DBfindAnswer(int TestID) {
 		System.out.println("ÕÍ≥…÷¥––");
-		String sql="SELECT * FROM sjzg.StudnetAnswer WHERE TestID = ?";
+		String sql="SELECT * FROM Answer WHERE TestID = ?";
 
 		ArrayList<AnswerModel> answerList = new ArrayList<AnswerModel>();
 		Connection conn = null;
