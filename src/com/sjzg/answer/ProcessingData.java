@@ -24,7 +24,7 @@ public class ProcessingData {
 	}
 public ArrayList<String>getuserbytest(int testid)
 {
-	String sql="SELECT UserID FROM Answer WHERE TestID = ?";
+	String sql="SELECT distinct UserID FROM Answer WHERE TestID = ?";
 	ArrayList<String>Alluser=new ArrayList<String>();
 	Connection conn = null;
 	PreparedStatement ps = null;
@@ -70,7 +70,7 @@ public ArrayList<ProcessedAnswerModel> processingdata(int testid)
 	
 	String sql="SELECT * FROM Answer WHERE TestID = ? AND UserID = ?";
 	ArrayList<String>Alluser=getuserbytest(testid);
-	ArrayList<AnswerModel> answerList = new ArrayList<AnswerModel>();
+	
 	Connection conn = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
@@ -78,13 +78,14 @@ public ArrayList<ProcessedAnswerModel> processingdata(int testid)
 	ArrayList<ProcessedAnswerModel>testresult=new ArrayList<ProcessedAnswerModel>();
 	for(int h=0;h<Alluser.size();h++)
 	{
+		ArrayList<AnswerModel> answerList = new ArrayList<AnswerModel>();
 		try {
 			 conn=DBConn.getConnection();
 			 ps=conn.prepareStatement(sql);
 			 ps.setInt(1, testid);
 		     ps.setString(2, Alluser.get(h));
 			 rs=ps.executeQuery();
-			
+			 
 			while(rs.next())
 			{	
 				
@@ -124,23 +125,25 @@ public ArrayList<ProcessedAnswerModel> processingdata(int testid)
 		for(int i=0;i<answerList.size();i++)
 		{
 
-			System.out.println(answerList.get(i).getTrack());
+			//System.out.println(answerList.get(i).getTrack());
 			String patt1 ="do:(\\w*)";
 			Pattern r = Pattern.compile(patt1);
 			Matcher m = r.matcher(answerList.get(i).getTrack());
 			String track="";
 			// System.out.println("Found value: " + m.groupCount() );
+		
 			 while(m.find( )) {
 				 if(!m.group(1).equals("OK")&&!m.group(1).equals("UNLOCK")&&!m.group(1).equals("CLEAN"))
 				 {
 					 track=track+m.group(1);
 				 }
-				 System.out.println("Found value: " + m.group(1));
+				// System.out.println("Found value: " + m.group(1));
+				 
 		      } 
 	       String[] s=answerList.get(i).getAppear().split("@@");
 		   answerList.get(i).setTrack(track);
 		   answerList.get(i).setLookBackTime(s.length);
-		   System.out.println(track+" "+s.length);
+		   //System.out.println(track+" "+s.length);
 		}
 		String track="";
 		String timeuse="";
@@ -151,13 +154,13 @@ public ArrayList<ProcessedAnswerModel> processingdata(int testid)
 		{
 			track=track+answerList.get(i).getTrack()+",";
 			timeuse=timeuse+answerList.get(i).getTimeUsed()+",";
-			lookbacktimes=lookbacktimes+answerList.get(i).getTrack()+",";
+			lookbacktimes=lookbacktimes+answerList.get(i).getLookBackTime()+",";
 			useranswer=useranswer+answerList.get(i).getUserAnswer()+"@@";
 			grade=grade+answerList.get(i).getGrade();
 		}
 		track=track+answerList.get(answerList.size()-1).getTrack();
 		timeuse=timeuse+answerList.get(answerList.size()-1).getTimeUsed();
-		lookbacktimes=lookbacktimes+answerList.get(answerList.size()-1).getTrack();
+		lookbacktimes=lookbacktimes+answerList.get(answerList.size()-1).getLookBackTime();
 		grade=grade+answerList.get(answerList.size()-1).getGrade();
 		useranswer=useranswer+answerList.get(answerList.size()-1).getUserAnswer();
 		ProcessedAnswerModel processedanswerModel_temp=new ProcessedAnswerModel();
@@ -171,7 +174,7 @@ public ArrayList<ProcessedAnswerModel> processingdata(int testid)
 		//System.out.println(processedanswerModel_temp.toString());
 		testresult.add(processedanswerModel_temp);
 	}
-	System.out.println(testresult);
+	//System.out.println(testresult);
 	return testresult;
 	
 	

@@ -62,6 +62,10 @@ public class finaltest {
 	static double[] correctrate=new double[11];
 	static String concepts[]={"1NF","2NF","3NF","BCNF","主属性","传递函数依赖","决定因素","函数依赖","码","部分函数依赖","非主属性"};
 	static String filenames[]=new String[12];
+	public static void main(String args[]) throws IOException
+	{
+		HashMap<String,ArrayList<QuestionModel>> rr=Trainingmodel(12);
+	}
 	public static List<String> GetStudentidByTestid(int testid)
 	{
 		  String getpaperidbytest="SELECT UserID FROM Answer WHERE TestID=? group by QuestionID ;";
@@ -83,7 +87,7 @@ public class finaltest {
 			//System.out.println("testid.length "+testids.size());
 			return studentid;
 	}
-    public HashMap<String,ArrayList<QuestionModel>> Trainingmodel(int testid) throws FileNotFoundException {
+    public static HashMap<String,ArrayList<QuestionModel>> Trainingmodel(int testid) throws IOException {
     	Map<String,Double>conceptsrate=new HashMap<String,Double>();
         String[] attrNames = new String[] {"time", "lookbacktime","answertrace","collect"};
     	// String[] attrNames = new String[] {"outlook","temperature","humidity","play"};
@@ -183,7 +187,8 @@ public class finaltest {
              allresult.put(studentid.get(h), result);
              allstudentmp.put(studentid.get(h),conceptsrate);
         }
-        HashMap<String,ArrayList<QuestionModel>> rqlist=new recommend().Recommend(allresult);
+      //  HashMap<String,ArrayList<QuestionModel>> rqlist=new recommend().Recommend(allresult);
+        HashMap<String,ArrayList<QuestionModel>> rqlist=new  HashMap<String,ArrayList<QuestionModel>>();
         return rqlist;
     }
    
@@ -206,10 +211,14 @@ public class finaltest {
     	     //System.out.println("111 "+result.toString());
     	     return c;
     }
-	private static void Testnewdata(String[] attrNames, Object decisionTree,String stduentid) throws FileNotFoundException {
+	private static void Testnewdata(String[] attrNames, Object decisionTree,String stduentid) throws IOException {
 		//读入测试集
-		 File file = new File("/"+stduentid); 
+		 File directory = new File("");
+		 File file = new File(directory.getCanonicalPath()+"/"+stduentid); 
+		 //System.
+		 System.out.println(file.getAbsolutePath());
 		 String[] flist = file.list();
+		 System.out.println(file.getAbsolutePath()+" "+flist[0]);
 		int correct=0;
 		 HashMap<String, Map<String, Integer>> allNormalTF = new HashMap<String, Map<String,Integer>>();
 		 for(int j=0;j<flist.length;j++)

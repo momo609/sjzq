@@ -188,7 +188,7 @@ public class QuestionGetByPaper extends HttpServlet {
 				  tempStr = tempStr + ",?";
 			  }
 		  }
-		String sql="SELECT Question.QuestionID,Question.Type,Content,Choices,Image,Tag,Share,Answerkey,Difficulty,UserID,Answer,R_question_kp.kpID,Description FROM  Question,Knowledge_point,R_question_kp WHERE Question.QuestionID IN ("+tempStr+") and Question.QuestionID=R_question_kp.QuestionID and R_question_kp.KpID=Knowledge_point.KpID";
+		String sql="SELECT Question.QuestionID,Question.Type,Content,Choices,Image,Tag,Share,Answerkey,Difficulty,UserID,Answer,R_question_kp.kpID,Description,R_question_kp.CreateAt FROM  Question,Knowledge_point,R_question_kp WHERE Question.QuestionID IN ("+tempStr+") and Question.QuestionID=R_question_kp.QuestionID and R_question_kp.KpID=Knowledge_point.KpID";
 	
 		
 		Connection conn = null;

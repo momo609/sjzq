@@ -1,4 +1,4 @@
-
+package com.sjzg.answer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -57,7 +57,7 @@ public class analyzeknowledge {
 		  
 		  String getpaperidbytest="SELECT PaperID FROM Test WHERE TestID=?";
 			Connection conn=DBConn.getConnection();
-			int paperid;
+			int paperid = 0;
 			try
 			{
 				PreparedStatement ps=conn.prepareStatement(getpaperidbytest);
@@ -82,7 +82,7 @@ public class analyzeknowledge {
 //				System.out.println(s);
 		        String s=testresult.get(h).getLookBackTime();
 				String eachbacktime[]=s.split(",");
-				//System.out.println(eachbacktime.length);
+				//System.out.println(s);
 				for(int i=0;i<eachbacktime.length;i++)
 				{
 					avglookbacktime[i]=avglookbacktime[i]+(float)Integer.parseInt(eachbacktime[i]);
@@ -133,7 +133,7 @@ public class analyzeknowledge {
 				return;
 			}
 			String questionListStr = DBfindPaper_result.getQuestions();
-			System.out.println(questionListStr);
+			//System.out.println(questionListStr);
 
 			
 			String[] questionList = questionListStr.split("@@");//丢弃空字符串
@@ -172,20 +172,20 @@ public class analyzeknowledge {
 			for(int i=0;i<qlist.size();i++)
 			{
 				String id=qlist.get(i).getQuestionID()+"";
-				if(collectlist.toString().indexOf(id)>=0)
-				{
-					judgecollect[i]=1;
-				}
-				else
-				{
-					judgecollect[i]=0;
-				}
+//				if(collectlist.toString().indexOf(id)>=0)
+//				{
+//					judgecollect[i]=1;
+//				}
+//				else
+//				{
+//					judgecollect[i]=0;
+//				}
 				String correct = qlist.get(i).getAnswer().trim();
 				String stuAnswer = answers[i].trim();
 				//如果填空题中有个空需要填两个单词，标准情况下是每个单词以一个空格隔开，但是如果考生用大于一个空格隔开，此时应该先对这种情况进行处理，去掉多余的空格
 				stuAnswer=stuAnswer.replaceAll("\\s+"," ");//只去掉中间多余空格 \\s+表示多个空格
 				//countanswer[i]=count(stuAnswer,correct);
-				System.out.println(count(stuAnswer,correct));
+				//System.out.println(count(stuAnswer,correct));
 				if(correct.equalsIgnoreCase(stuAnswer))
 				{
 					finalresults[i]="1";
@@ -206,6 +206,8 @@ public class analyzeknowledge {
 			}
 			
 			 FileOutputStream o2= new FileOutputStream("results.txt");
+			 System.out.println("判断"+qlist.size());
+			 File directory = new File("");
 			for(int i=0;i<qlist.size();i++)
 			{
 				String s=qlist.get(i).getKnowledgepoint();
@@ -213,12 +215,14 @@ public class analyzeknowledge {
 				s.replaceAll("\\?", " "); 
 				s=s.trim();
 				System.out.println(qlist.get(i).getKnowledgepoint());
-				String path="/"+testresults.get(j).getUserID()+"/";
+				String path=directory.getCanonicalPath()+"/"+testresults.get(j).getUserID()+"/";
+				filename=path+s+".txt";
 				  File file=new File(path);
 			        if(!file.exists()){
 			        	file.mkdirs();
 			        }
-				filename=path+s+".txt";
+				//filename=path+s+".txt";
+				System.out.println("文件名 "+filename);
 				FileOutputStream o= new FileOutputStream(filename,true);
 //				writes=qlist.get(i).getLevel()+","+judgetime[i]+","+judgelookback[i]+","+countanswer[i]+","+judgecollect[i]+","+finalresults[i]+"\r\n";
 				writes=judgetime[i]+","+judgelookback[i]+","+countanswer[i]+","+judgecollect[i]+","+finalresults[i]+"\r\n";
