@@ -31,26 +31,18 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import com.sjzg.answer.ProcessedAnswerModel;
+import com.sjzg.answer.RankByScore;
 import com.sjzg.database.DBConn;
+import com.sjzg.question.QuestionGetByConcepts;
 import com.sjzg.question.QuestionModel;
+import com.sjzg.tool.KnowledgeGraph;
  
 public class finaltest {
 
 	static String results = null;
 	static int[] correctcount=new int[11];
-	
 //	static double[] correctrate=new double[11];
-	static int[][] edge ={{1,1,0,0,0,0,0,0,0,0,0},
-		                  {0,1,1,0,0,0,0,0,0,0,0},
-		                  {0,0,1,1,0,0,0,0,0,0,0},
-		                  {0,0,0,1,0,0,1,0,0,0,0},
-		                  {0,0,0,0,1,0,0,0,0,0,0},
-		                  {0,0,1,0,0,1,0,0,0,0,0},
-		                  {0,0,0,0,0,0,1,0,1,0,0},
-		                  {0,0,0,0,0,1,0,1,0,1,0},
-		                  {0,0,0,0,1,0,0,0,1,0,1},
-		                  {0,1,0,0,0,0,0,0,0,1,0},
-		                  {0,0,0,0,0,0,0,0,0,0,1}};
 	static Map<String,Integer>recommend=new HashMap<String,Integer>();
 	static Map<String,Double>finalrecommend=new HashMap<String,Double>();
 	static Map<String,Integer>recommends=new HashMap<String,Integer>();
@@ -60,7 +52,7 @@ public class finaltest {
 	static ArrayList<String>result=new ArrayList<String>();
 	static ArrayList<Double>resultrate=new ArrayList<Double>();
 	static double[] correctrate=new double[11];
-	static String concepts[]={"1NF","2NF","3NF","BCNF","主属性","传递函数依赖","决定因素","函数依赖","码","部分函数依赖","非主属性"};
+	
 	static String filenames[]=new String[12];
 	public static void main(String args[]) throws IOException
 	{
@@ -103,7 +95,15 @@ public class finaltest {
         // 生成决策树
         // 输出决策树
         outputDecisionTree(decisionTree, 0, null);
-        List<String>studentid=GetStudentidByTestid(testid);
+        RankByScore rank=new RankByScore();
+        ArrayList<ArrayList<ProcessedAnswerModel>>studentgroup=rank.groupStudent(testid);
+        List<String>studentid=new ArrayList<String>();
+        for(int i=0;i<studentgroup.get(0).size();i++)
+        {
+        	studentid.add(studentgroup.get(0).get(i).getUserID());
+        }
+        System.out.println("studentid=  "+studentid.toString());
+        //List<String>studentid=GetStudentidByTestid(testid);
         HashMap<String,ArrayList<String>>allresult=new HashMap<String,ArrayList<String>>();
         HashMap<String,Map<String,Double>>allstudentmp=new HashMap<String,Map<String,Double>>();
         for(int h=0;h<studentid.size();h++)
@@ -120,7 +120,7 @@ public class finaltest {
         	 }
        	     for(int i=0;i<11;i++)
        	     {
-       		     conceptsrate.put(concepts[i], correctrate[i]);
+       		     conceptsrate.put(KnowledgeGraph.concepts[i], correctrate[i]);
        	     }
        	     List<Entry<String, Integer>> list = new ArrayList<Entry<String, Integer>>(recommend.entrySet());            
              Collections.sort(list,new Comparator<Map.Entry<String, Integer>>() {  
@@ -211,6 +211,17 @@ public class finaltest {
     	     //System.out.println("111 "+result.toString());
     	     return c;
     }
+    public static HashMap<String,Integer> GetQuestionnumberByConcepts()
+    {
+    	QuestionGetByConcepts q=new QuestionGetByConcepts();
+    	HashMap<String,ArrayList<String>>questions=new HashMap<String,ArrayList<String>>();
+    	HashMap<String,Integer>questionnumber=new HashMap<String,Integer>();
+    	List<Entry<String, ArrayList<String>>> list = new ArrayList<Entry<String,ArrayList<String>>>(questions.entrySet());
+    	 for (Entry<String, ArrayList<String>> e: list) {  
+	    	  questionnumber.put(e.getKey(), e.getValue().size());    
+	     }  
+    	 return questionnumber;
+    }
 	private static void Testnewdata(String[] attrNames, Object decisionTree,String stduentid) throws IOException {
 		//读入测试集
 		 File directory = new File("");
@@ -220,6 +231,7 @@ public class finaltest {
 		 String[] flist = file.list();
 		 System.out.println(file.getAbsolutePath()+" "+flist[0]);
 		int correct=0;
+		HashMap<String,Integer> questionnumber=GetQuestionnumberByConcepts();
 		 HashMap<String, Map<String, Integer>> allNormalTF = new HashMap<String, Map<String,Integer>>();
 		 for(int j=0;j<flist.length;j++)
 		 {
@@ -249,7 +261,7 @@ public class finaltest {
 		        }
 			    correctcount[j]=correct;
 			    System.out.println("correctcount[j]"+correctcount[j]);
-			    correctrate[j]=(double)correctcount[j]/(double)5;
+			    correctrate[j]=(double)correctcount[j]/(double)questionnumber.get(KnowledgeGraph.concepts[j]);  //计算准确率
 			    //System.out.println(count);
 			    long endTime = System.currentTimeMillis();
 			    System.out.println(">>>>>分类完成");
@@ -275,30 +287,30 @@ public class finaltest {
 			if(correctrate[i]<=avg)
 		   {
 			 // System.out.println(concepts[i]);
-			  if(recommend.get(concepts[i])==null)
+			  if(recommend.get(KnowledgeGraph.concepts[i])==null)
 			    {
-				  recommend.put(concepts[i],1);
+				  recommend.put(KnowledgeGraph.concepts[i],1);
 			    }
 			  else
 			  {
-				  int a=recommend.get(concepts[i])+1;
-				  recommend.put(concepts[i],a);
+				  int a=recommend.get(KnowledgeGraph.concepts[i])+1;
+				  recommend.put(KnowledgeGraph.concepts[i],a);
 			  }
 			  for(int j=0;j<11;j++)
 			   {
-				  if(edge[j][i]==1&&j!=i)
+				  if(KnowledgeGraph.edge[j][i]==1&&j!=i)
 				   {
 				    	if(correctrate[j]<=avg)
 				    		{
 				    		 // System.out.println(concepts[i]);
-				    		  if(recommend.get(concepts[j])==null)
+				    		  if(recommend.get(KnowledgeGraph.concepts[j])==null)
 						      {
-							    recommend.put(concepts[j],1);
+							    recommend.put(KnowledgeGraph.concepts[j],1);
 						      }
 						      else
 						      {
-							     int a=recommend.get(concepts[j])+1;
-							     recommend.put(concepts[j],a);
+							     int a=recommend.get(KnowledgeGraph.concepts[j])+1;
+							     recommend.put(KnowledgeGraph.concepts[j],a);
 						      }
 				    		    recommends(j,correctrate);
 				    		}
