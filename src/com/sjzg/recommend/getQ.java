@@ -92,26 +92,64 @@ public class getQ {
 		}
 		
 	}
-	public int[][] getq()
+	public static void main(String args[])
 	{
-		int[][] Q=new int[56][56];
+		getQ.getq();
+	}
+	public static int[][] getq()
+	{
+		HashMap<String,Integer> kg=new HashMap<String,Integer>();
+		kg.put("1NF",0);
+        kg.put("2NF",1);
+        kg.put("3NF",2);
+        kg.put("BCNF",3);
+        kg.put("主属性",4);
+        kg.put("传递函数依赖",5);
+        kg.put("决定因素",6);
+        kg.put("函数依赖",7);
+        kg.put("码",8);
+        kg.put("部分函数依赖",9);
+        kg.put("非主属性",10);
+		int[][] Q=new int[56][11];
+//		for(int i=0;i<56;i++)
+//		{
+//			for(int j=0;j<11;j++)
+//			{
+//				System.out.print(Q[i][j]);
+//			}
+//			System.out.println();
+//		}
 		String sql="SELECT question.id,question.stem,question.answer,question.answerkey,question.tag,question.type,r_testpaper_question.q_order "+
 	               "FROM r_testpaper_question,question where r_testpaper_question.paperid=287 and r_testpaper_question.questionid=question.id ORDER BY r_testpaper_question.q_order";
 		Connection conn=getConnection();
 		HashMap<String,ArrayList<String>>questions=new HashMap<String,ArrayList<String>>();
+		int col=0;
 		try {
 			PreparedStatement ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
-			
+			String s;
 			while(rs.next())
 			{
-				
-	
+		       
+		       	s=rs.getString("question.tag");
+		         s.replaceAll("\\?", " "); 
+				s=s.trim();
+				//System.out.println(s+" "+kg.get(s));	
+	            Q[col][kg.get(s)]=1;
+	            col++;
 			}
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+//		for(int i=0;i<56;i++)
+//		{
+//			for(int j=0;j<11;j++)
+//			{
+//				System.out.print(Q[i][j]);
+//			}
+//			System.out.println();
+//		}
 		return Q;
 	}
 }
