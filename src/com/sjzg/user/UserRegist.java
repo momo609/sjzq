@@ -72,8 +72,9 @@ public class UserRegist extends HttpServlet {
 		String MobilePhone=request.getParameter("MobilePhone");
 		String Password=request.getParameter("Password");
 		String RealName=request.getParameter("RealName");
+		String Role=request.getParameter("Role");
 		
-
+		
 		
 		System.out.println("È¡µÄUserID+"+UserID);
 
@@ -85,7 +86,7 @@ public class UserRegist extends HttpServlet {
 		userModel.setMobilePhone(MobilePhone);
 		
 		
-		userModel.setRole("student");
+		userModel.setRole(Role);
 		userModel.setSex("null");
 		userModel.setAvatar("https://sjzg-1252169987.cos.ap-guangzhou.myqcloud.com/default-avatar.png");
 		userModel.setNickName("ÐÂÅóÓÑ");

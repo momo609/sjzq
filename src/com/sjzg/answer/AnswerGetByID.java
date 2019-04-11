@@ -161,7 +161,7 @@ public class AnswerGetByID extends HttpServlet {
 
 
 
-				 answerQuestionModel_temp.setTimeUsed(rs.getInt("TimeUsed"));
+				 answerQuestionModel_temp.setTimeUsed(rs.getFloat("TimeUsed"));
 				 answerQuestionModel_temp.setTrack(rs.getString("Track"));
 				 answerQuestionModel_temp.setGrade(rs.getFloat("Grade"));
 				answerQuestionModel_temp.setUnfocusDuration(rs.getInt("UnfocusDuration"));

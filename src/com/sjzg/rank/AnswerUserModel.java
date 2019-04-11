@@ -5,7 +5,7 @@ public class AnswerUserModel {
 
 	private int QuestionID;
 	private int TestID;
-	private int TimeUsed;
+	private float TimeUsed;
 	private String Track;
 	private float Grade;
 	private String Unfocus;
@@ -29,10 +29,10 @@ public class AnswerUserModel {
 	public void setTestID(int testID) {
 		TestID = testID;
 	}
-	public int getTimeUsed() {
+	public float getTimeUsed() {
 		return TimeUsed;
 	}
-	public void setTimeUsed(int timeUsed) {
+	public void setTimeUsed(float timeUsed) {
 		TimeUsed = timeUsed;
 	}
 	public String getTrack() {

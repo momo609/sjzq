@@ -6,13 +6,21 @@ public class AnswerModel {
 	private String UserID;
 	private int QuestionID;
 	private int TestID;
-	private int TimeUsed;
+	private float TimeUsed;
 	private String Track;
 	private float Grade;
 	private String Unfocus;
 	private String Appear;
 	private String UserAnswer;
 	private int LookBackTime;
+	private int collection;
+	
+	public int getCollection() {
+		return collection;
+	}
+	public void setCollection(int collection) {
+		this.collection = collection;
+	}
 	public int getLookBackTime() {
 		return LookBackTime;
 	}
@@ -44,10 +52,10 @@ public class AnswerModel {
 		TestID = testID;
 	}
 
-	public int getTimeUsed() {
+	public float getTimeUsed() {
 		return TimeUsed;
 	}
-	public void setTimeUsed(int timeUsed) {
+	public void setTimeUsed(float timeUsed) {
 		TimeUsed = timeUsed;
 	}
 	public String getTrack() {

@@ -275,7 +275,7 @@ public class RankByTime extends HttpServlet {
 				answerModel_temp.setUserID(rs.getString("UserID"));
 				answerModel_temp.setQuestionID(rs.getInt("QuestionID"));
 				answerModel_temp.setTestID(rs.getInt("TestID"));
-				answerModel_temp.setTimeUsed(rs.getInt("TimeUsed"));
+				answerModel_temp.setTimeUsed(rs.getFloat("TimeUsed"));
 				answerModel_temp.setTrack(rs.getString("Track"));
 				answerModel_temp.setGrade(rs.getFloat("Grade"));
 				answerModel_temp.setUnfocus(rs.getString("Unfocus"));

@@ -100,6 +100,7 @@ public ArrayList<ProcessedAnswerModel> processingdata(int testid)
 				answerModel_temp.setUnfocus(rs.getString("Unfocus"));
 				answerModel_temp.setAppear(rs.getString("Appear"));
 				answerModel_temp.setUserAnswer(rs.getString("UserAnswer"));
+				answerModel_temp.setCollection(rs.getInt("Collection"));
 				answerList.add(answerModel_temp);
 			}
 			conn.close();
@@ -150,6 +151,7 @@ public ArrayList<ProcessedAnswerModel> processingdata(int testid)
 		String lookbacktimes="";
 		String useranswer="";
 		float grade=0;
+		String collection="";
 		for(int i=0;i<answerList.size()-1;i++)
 		{
 			track=track+answerList.get(i).getTrack()+",";
@@ -157,12 +159,15 @@ public ArrayList<ProcessedAnswerModel> processingdata(int testid)
 			lookbacktimes=lookbacktimes+answerList.get(i).getLookBackTime()+",";
 			useranswer=useranswer+answerList.get(i).getUserAnswer()+"@@";
 			grade=grade+answerList.get(i).getGrade();
+			collection=collection+answerList.get(i).getCollection()+",";
 		}
 		track=track+answerList.get(answerList.size()-1).getTrack();
 		timeuse=timeuse+answerList.get(answerList.size()-1).getTimeUsed();
 		lookbacktimes=lookbacktimes+answerList.get(answerList.size()-1).getLookBackTime();
 		grade=grade+answerList.get(answerList.size()-1).getGrade();
 		useranswer=useranswer+answerList.get(answerList.size()-1).getUserAnswer();
+		collection=collection+answerList.get(answerList.size()-1).getCollection();
+		
 		ProcessedAnswerModel processedanswerModel_temp=new ProcessedAnswerModel();
 		processedanswerModel_temp.setLookBackTime(lookbacktimes);
 		processedanswerModel_temp.setTestID(testid);
@@ -171,10 +176,11 @@ public ArrayList<ProcessedAnswerModel> processingdata(int testid)
 		processedanswerModel_temp.setUserAnswer(useranswer);
 		processedanswerModel_temp.setUserID(Alluser.get(h));
 		processedanswerModel_temp.setGrade(grade);
+		processedanswerModel_temp.setCollectionlist(collection);
 		//System.out.println(processedanswerModel_temp.toString());
 		testresult.add(processedanswerModel_temp);
 	}
-	//System.out.println(testresult);
+	System.out.println(testresult);
 	return testresult;
 	
 	

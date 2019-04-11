@@ -347,6 +347,48 @@
     <servlet-name>BehaviourCreate</servlet-name>
     <servlet-class>com.sjzg.behaviour.BehaviourCreate</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperGetByShare</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperGetByShare</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperShareAdd</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperShareAdd</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperShareGet</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperShareGet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperShareClean</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperShareClean</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionCollectionAdd</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionCollectionAdd</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>BehaviourCreateV2</servlet-name>
+    <servlet-class>com.sjzg.behaviour.BehaviourCreateV2</servlet-class>
+  </servlet>
+
+
+
+
+
+
 
 
 
@@ -631,6 +673,30 @@
   <servlet-mapping>
     <servlet-name>BehaviourCreate</servlet-name>
     <url-pattern>/servlet/BehaviourCreate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperGetByShare</servlet-name>
+    <url-pattern>/servlet/PaperGetByShare</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperShareAdd</servlet-name>
+    <url-pattern>/servlet/PaperShareAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperShareGet</servlet-name>
+    <url-pattern>/servlet/PaperShareGet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperShareClean</servlet-name>
+    <url-pattern>/servlet/PaperShareClean</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionCollectionAdd</servlet-name>
+    <url-pattern>/servlet/QuestionCollectionAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BehaviourCreateV2</servlet-name>
+    <url-pattern>/servlet/BehaviourCreateV2</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

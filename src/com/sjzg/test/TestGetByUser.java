@@ -6,8 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -102,11 +105,40 @@ public class TestGetByUser extends HttpServlet {
 				tempObject.addProperty("StartTime", DBfindTest_result.get(i).getStartTime());
 				tempObject.addProperty("EndTime", DBfindTest_result.get(i).getEndTime());
 				tempObject.addProperty("CreateAt", DBfindTest_result.get(i).getCreateAt());
+				tempObject.addProperty("CourseName", DBfindTest_result.get(i).getExtendContent());
 				if(DBfindTestAnswer( DBfindTest_result.get(i).getTestID() ,UserID)   ){
 					tempObject.addProperty("Finished", true);
 				}else{
 					tempObject.addProperty("Finished", false);
 				}
+				
+				
+				boolean TimeEarly  = false;
+				boolean TimeLate  = false;
+				
+				
+				Date cuttentDate = new Date();
+				SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				
+				
+				long diff = 0;
+				try {
+					diff = (DateFormat.parse(DBfindTest_result.get(i).getStartTime()).getTime() - cuttentDate.getTime());
+				    if (diff>0) {
+		            	TimeEarly = true;
+		            }
+				    diff = (DateFormat.parse(DBfindTest_result.get(i).getEndTime()).getTime() - cuttentDate.getTime());
+				    if (diff<0) {
+				    	TimeLate = true;
+		            }
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        
+				tempObject.addProperty("TimeEarly", TimeEarly);
+				tempObject.addProperty("TimeLate", TimeLate);
+				
 				
 				
 				questionJsonArray.add(tempObject);
@@ -130,8 +162,9 @@ public class TestGetByUser extends HttpServlet {
 	
 	public ArrayList<TestModel> DBfindTest(String UserID) {
 		System.out.println("完成执行DBfindTest");
-		String sql="SELECT Test.*,R_user_course.* FROM  Test , R_user_course " +
+		String sql="SELECT Test.*,R_user_course.* , Course.CourseName FROM  Test , R_user_course ,Course " +
 				"WHERE R_user_course.UserID=? " +
+				"AND Course.CourseID = Test.CourseID "+
 				"AND Test.CourseID = R_user_course.CourseID "+
 				"AND R_user_course.State=2 ;";
 
@@ -159,9 +192,8 @@ public class TestGetByUser extends HttpServlet {
 				testModel_temp.setTestID(rs.getInt("TestID"));
 				testModel_temp.setEndTime(rs.getString("EndTime"));
 				testModel_temp.setStartTime(rs.getString("StartTime"));
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(rs.getTimestamp("CreateAt"));
-				testModel_temp.setCreateAt((calendar.get(Calendar.YEAR))+"-"+(calendar.get(Calendar.MONDAY)+1) + "-" +(calendar.get(Calendar.DAY_OF_MONTH)));
+				testModel_temp.setExtendContent(rs.getString("CourseName"));
+				testModel_temp.setCreateAt(rs.getString("CreateAt"));
 				
 				
 				testList.add(testModel_temp);
@@ -193,7 +225,7 @@ public class TestGetByUser extends HttpServlet {
 	
 	public boolean DBfindTestAnswer(int TestID , String UserID) {
 		System.out.println("完成执行DBfindTestAnswer");
-		String sql="SELECT Test.*,Answer.* FROM  Answer , Test " +
+		String sql="SELECT Test.*,Answer.* FROM  Answer , Test  " +
 				"WHERE Test.TestID = ? " +
 				"AND Test.TestID = Answer.TestID "+
 				"AND Test.State = 'open' "+

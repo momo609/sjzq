@@ -11,7 +11,7 @@ import com.sjzg.database.DBConn;
 public class QuestionGetByConcept {
 	public ArrayList<QuestionModel> GetQuestionByConcept(String pkp)
 	{
-       String sql="SELECT Question.QuestionID,Question.Type,Content,Choices,Image,Tag,Share,Answerkey,Difficulty,UserID,Answer,R_question_kp.kpID,Description FROM  Question,Knowledge_point,R_question_kp WHERE R_question_kp.KpID IN ("+pkp+") and R_question_kp.QuestionID=Question.QuestionID and R_question_kp.KpID=Knowledge_point.KpID";
+       String sql="SELECT Question.QuestionID,Question.Type,Content,Choices,Image,Tag,Share,Answerkey,Difficulty,UserID,Answer,R_question_kp.kpID,Description,Knowledge_point.CreateAt FROM  Question,Knowledge_point,R_question_kp WHERE R_question_kp.KpID IN ("+pkp+") and R_question_kp.QuestionID=Question.QuestionID and R_question_kp.KpID=Knowledge_point.KpID";
 	
 		
 		Connection conn = null;

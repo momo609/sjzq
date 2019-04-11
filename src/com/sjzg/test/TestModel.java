@@ -12,6 +12,7 @@ public class TestModel {
 	private String CreateAt;
 	private String UpdateAt;
 	
+	private String ExtendContent;//方便传输的扩展内容
 	
 	public String validate() 
 	{
@@ -103,6 +104,16 @@ public class TestModel {
 
 	public void setState(String state) {
 		State = state;
+	}
+
+
+	public String getExtendContent() {
+		return ExtendContent;
+	}
+
+
+	public void setExtendContent(String extendContent) {
+		ExtendContent = extendContent;
 	}
 
 

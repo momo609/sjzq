@@ -54,6 +54,8 @@ public class finaltest {
 	static double[] correctrate=new double[11];
 	
 	static String filenames[]=new String[12];
+	
+	static int conceptnumeber=2;
 	public static void main(String args[]) throws IOException
 	{
 		HashMap<String,ArrayList<QuestionModel>> rr=Trainingmodel(12);
@@ -106,22 +108,24 @@ public class finaltest {
         //List<String>studentid=GetStudentidByTestid(testid);
         HashMap<String,ArrayList<String>>allresult=new HashMap<String,ArrayList<String>>();
         HashMap<String,Map<String,Double>>allstudentmp=new HashMap<String,Map<String,Double>>();
+        System.out.println("studentsize "+studentid.size());
         for(int h=0;h<studentid.size();h++)
         {
         	   //测试新的数据集
-            Testnewdata(attrNames,decisionTree,studentid.get(h));
+             Testnewdata(attrNames,decisionTree,studentid.get(h),testid);
              for(int i=0;i<correctrate.length;i++)
              {
           	      System.out.println(correctrate[i]+" "+filenames[i]);
              }
-       	     for(int i=0;i<11;i++)
+       	     for(int i=0;i<conceptnumeber;i++)
          	 {
           	     recommends(i,correctrate);
         	 }
-       	     for(int i=0;i<11;i++)
+       	     for(int i=0;i<conceptnumeber;i++)
        	     {
        		     conceptsrate.put(KnowledgeGraph.concepts[i], correctrate[i]);
        	     }
+       	     System.out.println("recommend "+recommend);
        	     List<Entry<String, Integer>> list = new ArrayList<Entry<String, Integer>>(recommend.entrySet());            
              Collections.sort(list,new Comparator<Map.Entry<String, Integer>>() {  
                     //升序排序  
@@ -132,7 +136,7 @@ public class finaltest {
              String[] cc=new String[recommend.size()]; //知识点名称
              int i=0;
              for (Entry<String, Integer> e: list) {  
-      	          System.out.print(e.getKey()+"="+e.getValue()+" ");
+      	          System.out.print("11  "+e.getKey()+"="+e.getValue()+" ");
       	          cc[i]=e.getKey();
       	          i++;
       	          recommends.put(e.getKey(),e.getValue());
@@ -148,47 +152,59 @@ public class finaltest {
             System.out.println();
              for (Entry<String, Double> e: list2) {  
           	      finalrecommends.put(e.getKey(),e.getValue());
-      	          System.out.print(e.getKey()+"="+e.getValue()+"  ");
+      	          System.out.print("22  "+e.getKey()+"="+e.getValue()+"  ");
                   
              } 
             System.out.println();
-            for(int z=0;z<cc.length-1;z++)
+            if(cc.length==1)
             {
-          	     int j=z+1;
-          	   //System.out.println("55 "+(z==cc.length-2));
-          	    if(recommends.get(cc[z])==recommends.get(cc[j]))
-          	    {
-          		  System.out.println("11 "+ z+" "+j+" "+recommends.get(cc[z])+" "+recommends.get(cc[j]));
-          		  c.put(cc[z], finalrecommends.get(cc[z]));
-          		  c.put(cc[j], finalrecommends.get(cc[z]));
-          		  /// System.out.println("22 "+c.toString());
-          		  if(z==cc.length-2)
-          		  {
-          			  c= ss(c);
-          		  }
-          	    }
-          	   else 
-          	   {
-          		   // System.out.println("44 "+z+" "+c.size());
-          		    if(c.size()!=0)
-          			{
-          		   //	 System.out.println("33 "+c.toString());
-          			   c= ss(c);
-          			   c.clear();
-          			}
-          		   else
-          			{
-          			     result.add(cc[z]);
-          			     resultrate.add(finalrecommends.get(cc[z]));
-          			}
-          	     }          	
-              }
-             System.out.println("推荐顺序 "+result.toString());//不掌握知识点
+            	 result.add(cc[0]);
+            }
+            else
+            {
+            	 for(int z=0;z<cc.length-1;z++)
+                 {
+               	     int j=z+1;
+               	   //System.out.println("55 "+(z==cc.length-2));
+               	    if(recommends.get(cc[z])==recommends.get(cc[j]))
+               	    {
+               		  System.out.println("11 "+ z+" "+j+" "+recommends.get(cc[z])+" "+recommends.get(cc[j]));
+               		  c.put(cc[z], finalrecommends.get(cc[z]));
+               		  c.put(cc[j], finalrecommends.get(cc[z]));
+               		  /// System.out.println("22 "+c.toString());
+               		  if(z==cc.length-2)
+               		  {
+               			  c= ss(c);
+               		  }
+               	    }
+               	   else 
+               	   {
+               		   // System.out.println("44 "+z+" "+c.size());
+               		    if(c.size()!=0)
+               			{
+               		   //	 System.out.println("33 "+c.toString());
+               			   c= ss(c);
+               			   c.clear();
+               			}
+               		   else
+               			{
+               			     result.add(cc[z]);
+               			     resultrate.add(finalrecommends.get(cc[z]));
+               			}
+               	     }          	
+                   }
+            }
+           
+             
              allresult.put(studentid.get(h), result);
              allstudentmp.put(studentid.get(h),conceptsrate);
+             System.out.println("推荐顺序 "+result.toString()+" "+recommends);//不掌握知识点
         }
-      //  HashMap<String,ArrayList<QuestionModel>> rqlist=new recommend().Recommend(allresult);
-        HashMap<String,ArrayList<QuestionModel>> rqlist=new  HashMap<String,ArrayList<QuestionModel>>();
+        
+        HashMap<String,ArrayList<QuestionModel>> rqlist=new recommend().Recommend(allresult,testid);
+//        HashMap<String,ArrayList<QuestionModel>> rqlist=new  HashMap<String,ArrayList<QuestionModel>>();
+        
+        System.out.println(rqlist);
         return rqlist;
     }
    
@@ -211,10 +227,11 @@ public class finaltest {
     	     //System.out.println("111 "+result.toString());
     	     return c;
     }
-    public static HashMap<String,Integer> GetQuestionnumberByConcepts()
+    public static HashMap<String,Integer> GetQuestionnumberByConcepts(int testid)
     {
     	QuestionGetByConcepts q=new QuestionGetByConcepts();
-    	HashMap<String,ArrayList<String>>questions=new HashMap<String,ArrayList<String>>();
+    	 HashMap<String,ArrayList<String>>questions=q.questionnumbergetbyconcepts(testid);
+    	
     	HashMap<String,Integer>questionnumber=new HashMap<String,Integer>();
     	List<Entry<String, ArrayList<String>>> list = new ArrayList<Entry<String,ArrayList<String>>>(questions.entrySet());
     	 for (Entry<String, ArrayList<String>> e: list) {  
@@ -222,21 +239,21 @@ public class finaltest {
 	     }  
     	 return questionnumber;
     }
-	private static void Testnewdata(String[] attrNames, Object decisionTree,String stduentid) throws IOException {
+	private static void Testnewdata(String[] attrNames, Object decisionTree,String stduentid,int testid) throws IOException {
 		//读入测试集
 		 File directory = new File("");
-		 File file = new File(directory.getCanonicalPath()+"/"+stduentid); 
+		 File file = new File(directory.getCanonicalPath()+"/"+testid+"/"+stduentid); 
 		 //System.
 		 System.out.println(file.getAbsolutePath());
 		 String[] flist = file.list();
 		 System.out.println(file.getAbsolutePath()+" "+flist[0]);
 		int correct=0;
-		HashMap<String,Integer> questionnumber=GetQuestionnumberByConcepts();
+		HashMap<String,Integer> questionnumber=GetQuestionnumberByConcepts(testid);
 		 HashMap<String, Map<String, Integer>> allNormalTF = new HashMap<String, Map<String,Integer>>();
 		 for(int j=0;j<flist.length;j++)
 		 {
 			 correct=0;
-			  String filename="/"+stduentid+"/" + flist[j];
+			  String filename=directory.getCanonicalPath()+"/"+testid+"/"+stduentid+"/" + flist[j];
 			  filenames[j]=flist[j];
 			  System.out.println(filename);
 		      Object[][] TestData=gettestdata(filename);
@@ -260,7 +277,7 @@ public class finaltest {
 		            count++;
 		        }
 			    correctcount[j]=correct;
-			    System.out.println("correctcount[j]"+correctcount[j]);
+			    System.out.println("correctcount[j]"+correctcount[j]+" "+questionnumber +" "+KnowledgeGraph.concepts[j]);
 			    correctrate[j]=(double)correctcount[j]/(double)questionnumber.get(KnowledgeGraph.concepts[j]);  //计算准确率
 			    //System.out.println(count);
 			    long endTime = System.currentTimeMillis();
@@ -296,7 +313,7 @@ public class finaltest {
 				  int a=recommend.get(KnowledgeGraph.concepts[i])+1;
 				  recommend.put(KnowledgeGraph.concepts[i],a);
 			  }
-			  for(int j=0;j<11;j++)
+			  for(int j=0;j<conceptnumeber;j++)  
 			   {
 				  if(KnowledgeGraph.edge[j][i]==1&&j!=i)
 				   {
@@ -454,7 +471,7 @@ public class finaltest {
 				String[] dataIn=data.split(",");
 				for(int j=0;j<4;j++)
 				{
-					//System.out.println("j  "+dataIn[j]);
+					System.out.println("j  "+dataIn[j]);
 					TestData[i][j]=dataIn[j];
 				}
 					i++;

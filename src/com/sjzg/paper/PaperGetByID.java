@@ -105,6 +105,7 @@ public class PaperGetByID extends HttpServlet {
 				tempObject.addProperty("Description", DBfindPaper_result.get(i).getDescription());
 				tempObject.addProperty("Tag", DBfindPaper_result.get(i).getTag());
 				tempObject.addProperty("UserID", DBfindPaper_result.get(i).getUserID());
+				tempObject.addProperty("NickName", DBfindPaper_result.get(i).getExtendContent());
 				tempObject.addProperty("PaperID", DBfindPaper_result.get(i).getPaperID());
 				tempObject.addProperty("CreateAt", DBfindPaper_result.get(i).getCreateAt());
 				tempObject.addProperty("Questions", DBfindPaper_result.get(i).getQuestions());
@@ -146,7 +147,8 @@ public class PaperGetByID extends HttpServlet {
 				
 				paperModel_temp.setTitle(rs.getString("Title"));
 				paperModel_temp.setDescription(rs.getString("Description"));
-				paperModel_temp.setUserID(rs.getString("NickName"));
+				paperModel_temp.setUserID(rs.getString("UserID"));
+				paperModel_temp.setExtendContent(rs.getString("NickName"));
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTime(rs.getTimestamp("CreateAt"));
 				paperModel_temp.setCreateAt((calendar.get(Calendar.YEAR))+"-"+(calendar.get(Calendar.MONDAY)+1) + "-" +(calendar.get(Calendar.DAY_OF_MONTH)));

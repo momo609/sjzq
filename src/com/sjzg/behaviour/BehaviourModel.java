@@ -5,7 +5,7 @@ public class BehaviourModel {
 	private String UserID;
 
 	private String Behaviour;
-
+	private int TimeUnit;
 	public int getID() {
 		return ID;
 	}
@@ -30,6 +30,14 @@ public class BehaviourModel {
 
 	public void setBehaviour(String behaviour) {
 		Behaviour = behaviour;
+	}
+
+	public int getTimeUnit() {
+		return TimeUnit;
+	}
+
+	public void setTimeUnit(int timeUnit) {
+		TimeUnit = timeUnit;
 	}
 
 	

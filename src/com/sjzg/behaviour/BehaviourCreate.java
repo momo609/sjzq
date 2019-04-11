@@ -89,14 +89,23 @@ public class BehaviourCreate extends HttpServlet {
 		//第一步，取数据
 		String UserID=request.getParameter("UserID");
 		String Behaviour = request.getParameter("Behaviour");
-
-
+		
+		
+		String TimeUnitStr=request.getParameter("TimeUnit");
+		
+		int TimeUnit=100;
+		
+		if(TimeUnitStr!=null ){
+			if(TimeUnitStr.equals("10")){
+				TimeUnit = 10;
+			}
+		}
 		
 		BehaviourModel behaviourModel=new BehaviourModel();
 		behaviourModel.setID(-1);
 		behaviourModel.setUserID(UserID);
 		behaviourModel.setBehaviour(Behaviour);
-
+		behaviourModel.setTimeUnit(TimeUnit);
 
 		
 		
@@ -130,7 +139,7 @@ public class BehaviourCreate extends HttpServlet {
 	
 	public String DBcreateBehaviour(BehaviourModel behaviourModel) {
 		System.out.println("执行DBcreateBehaviour");
-		String sql="INSERT INTO Behaviour(UserID,Behaviour,CreateAt,UpdateAt) VALUES(?,?,?,?)";
+		String sql="INSERT INTO Behaviour(UserID,Behaviour,TimeUnit,CreateAt,UpdateAt) VALUES(?,?,?,?,?)";
 
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -146,8 +155,9 @@ public class BehaviourCreate extends HttpServlet {
 			ps.setString(1, behaviourModel.getUserID());
 
 			ps.setString(2, behaviourModel.getBehaviour());
-			ps.setTimestamp(3, nowTimestamp);
+			ps.setInt(3, behaviourModel.getTimeUnit());
 			ps.setTimestamp(4, nowTimestamp);
+			ps.setTimestamp(5, nowTimestamp);
 			influence+=ps.executeUpdate();
 			
 

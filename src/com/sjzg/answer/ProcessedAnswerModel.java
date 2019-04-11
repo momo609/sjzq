@@ -9,7 +9,14 @@ public class ProcessedAnswerModel {
 	private String UserAnswer;
 	private String LookBackTime;
 	private int averagelookbacktime;
+	private String collectionlist;
 	
+	public String getCollectionlist() {
+		return collectionlist;
+	}
+	public void setCollectionlist(String collectionlist) {
+		this.collectionlist = collectionlist;
+	}
 	public String getUserID() {
 		return UserID;
 	}
@@ -60,11 +67,13 @@ public class ProcessedAnswerModel {
 	}
 	@Override
 	public String toString() {
-		return "ProcessedAnswerModel [ UserID=" + UserID
-				+ ", TestID=" + TestID + ", TimeUsed=" + TimeUsed + ", Track="
-				+ Track + ", Grade=" + Grade + ", UserAnswer=" + UserAnswer
-				+ ", LookBackTime=" + LookBackTime + ", averagelookbacktime="
-				+ averagelookbacktime + "]";
+		return "ProcessedAnswerModel [UserID=" + UserID + ", TestID=" + TestID
+				+ ", TimeUsed=" + TimeUsed + ", Track=" + Track + ", Grade="
+				+ Grade + ", UserAnswer=" + UserAnswer + ", LookBackTime="
+				+ LookBackTime + ", averagelookbacktime=" + averagelookbacktime
+				+ ", collectionlist=" + collectionlist + "]";
 	}
+
+	
 	
 }

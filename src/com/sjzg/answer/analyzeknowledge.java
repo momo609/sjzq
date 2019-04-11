@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -161,7 +162,7 @@ public class analyzeknowledge {
 			}
 			
 			String[] finalresults=new String[qlist.size()];
-			int[] judgecollect=new int[qlist.size()];
+			String[] judgecollect=testresults.get(j).getCollectionlist().split(",");
 			ArrayList <QuestionModel> wrongqlist=new ArrayList<QuestionModel>();
 			ArrayList <QuestionModel> rightqlist=new ArrayList<QuestionModel>();
 //			for(int i=0;i<qlist.size();i++)
@@ -172,14 +173,6 @@ public class analyzeknowledge {
 			for(int i=0;i<qlist.size();i++)
 			{
 				String id=qlist.get(i).getQuestionID()+"";
-//				if(collectlist.toString().indexOf(id)>=0)
-//				{
-//					judgecollect[i]=1;
-//				}
-//				else
-//				{
-//					judgecollect[i]=0;
-//				}
 				String correct = qlist.get(i).getAnswer().trim();
 				String stuAnswer = answers[i].trim();
 				//如果填空题中有个空需要填两个单词，标准情况下是每个单词以一个空格隔开，但是如果考生用大于一个空格隔开，此时应该先对这种情况进行处理，去掉多余的空格
@@ -205,7 +198,7 @@ public class analyzeknowledge {
 				
 			}
 			
-			 FileOutputStream o2= new FileOutputStream("results.txt");
+			 FileOutputStream o2= new FileOutputStream("results.txt",true);
 			 System.out.println("判断"+qlist.size());
 			 File directory = new File("");
 			for(int i=0;i<qlist.size();i++)
@@ -215,7 +208,7 @@ public class analyzeknowledge {
 				s.replaceAll("\\?", " "); 
 				s=s.trim();
 				System.out.println(qlist.get(i).getKnowledgepoint());
-				String path=directory.getCanonicalPath()+"/"+testresults.get(j).getUserID()+"/";
+				String path=directory.getCanonicalPath()+"/"+testid+"/"+testresults.get(j).getUserID()+"/";
 				filename=path+s+".txt";
 				  File file=new File(path);
 			        if(!file.exists()){
@@ -233,6 +226,10 @@ public class analyzeknowledge {
 			  
 	   }
 	   HashMap<String,ArrayList<QuestionModel>> rqlist=new finaltest().Trainingmodel(testid);
+	   List<Entry<String, ArrayList<QuestionModel>>> list = new ArrayList<Entry<String,ArrayList<QuestionModel>>>(rqlist.entrySet());
+  	   for (Entry<String, ArrayList<QuestionModel>> e: list) {  
+	    	    System.out.println(e.getValue().get(0).getContent());
+	     }  
 	   
    }
    public static String judgetime(String p_time,Double avgtime){

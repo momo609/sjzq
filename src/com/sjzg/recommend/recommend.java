@@ -19,10 +19,13 @@ import com.sjzg.question.QuestionModel;
 
 
 public class recommend {
-	public HashMap<String,ArrayList<QuestionModel>>  Recommend(HashMap<String,ArrayList<String>> allresult)
+	public HashMap<String,ArrayList<QuestionModel>>  Recommend(HashMap<String,ArrayList<String>> allresult,int testid)
 	{
+		HashMap<String,Integer>conceptid=new HashMap<String,Integer>();
+		conceptid.put("kg", 1);
+		conceptid.put("kg2", 2);
 		analyzeknowledge dao=new analyzeknowledge();
-		int paperid=dao.GetPaperidByTest(16);
+		int paperid=dao.GetPaperidByTest(testid);
 		QuestionGetByPaper questionDaoImpl=new QuestionGetByPaper();
 		
 		PaperModel DBfindPaper_result = questionDaoImpl.DBfindPaper(paperid);
@@ -45,13 +48,14 @@ public class recommend {
 		while (iter.hasNext()) {
 		   Map.Entry entry = (Map.Entry) iter.next();
 		   Object key = entry.getKey();
-		   ArrayList<String> pkp=new ArrayList<String>();
-		   pkp=(ArrayList<String>) entry.getValue();
+		   ArrayList<String> pkp=(ArrayList<String>) entry.getValue();
 		   String temp_kp="";
-		   for(int i=0;i<pkp.size();i++)
+		   for(int i=0;i<pkp.size()-1;i++)
 		   {
-			   temp_kp=temp_kp+pkp.get(i)+",";
+			   temp_kp=temp_kp+conceptid.get(pkp.get(i))+",";
 		   }
+		   temp_kp=temp_kp+conceptid.get(pkp.get(pkp.size()-1));
+		   System.out.println("pkp "+pkp+" temp_kp "+temp_kp);
 		   ArrayList<QuestionModel> prlist=new QuestionGetByConcept().GetQuestionByConcept(temp_kp);
 		   rqlist.put((String) entry.getKey(), prlist);
 		}

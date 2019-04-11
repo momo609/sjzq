@@ -113,7 +113,7 @@ public class TestGetByTeacher extends HttpServlet {
 				tempObject.addProperty("StartTime", DBfindTest_result.get(i).getStartTime());
 				tempObject.addProperty("EndTime", DBfindTest_result.get(i).getEndTime());
 				tempObject.addProperty("CreateAt", DBfindTest_result.get(i).getCreateAt());
-				
+				tempObject.addProperty("CourseName", DBfindTest_result.get(i).getExtendContent());
 				
 				questionJsonArray.add(tempObject);
 			}
@@ -136,7 +136,7 @@ public class TestGetByTeacher extends HttpServlet {
 	
 	public ArrayList<TestModel> DBfindTest(String UserID) {
 		System.out.println("ÕÍ≥…÷¥––DBfindTest");
-		String sql="SELECT Test.* FROM  Test , Course " +
+		String sql="SELECT Test.*,Course.CourseName FROM  Test , Course " +
 				"WHERE Course.TeacherID=? " +
 				"AND Test.CourseID = Course.CourseID ";
 
@@ -162,6 +162,7 @@ public class TestGetByTeacher extends HttpServlet {
 				testModel_temp.setTestTime(rs.getInt("TestTime"));
 				testModel_temp.setTestName(rs.getString("TestName"));
 				testModel_temp.setTestID(rs.getInt("TestID"));
+				testModel_temp.setExtendContent(rs.getString("CourseName"));
 				testModel_temp.setEndTime(rs.getString("EndTime"));
 				testModel_temp.setStartTime(rs.getString("StartTime"));
 				Calendar calendar = Calendar.getInstance();

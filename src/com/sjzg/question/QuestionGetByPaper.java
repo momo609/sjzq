@@ -65,19 +65,19 @@ public class QuestionGetByPaper extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
-		request.setCharacterEncoding("UTF-8");//ÉèÖÃ¶Ô¿Í»§¶ËÇëÇó½øĞĞÖØĞÂ±àÂëµÄ±àÂë¡£
-		response.setCharacterEncoding("UTF-8");//Ö¸¶¨¶Ô·şÎñÆ÷ÏìÓ¦½øĞĞÖØĞÂ±àÂëµÄ±àÂë¡£
-		response.addHeader("Access-Control-Allow-Origin", "*");//¿çÓò
-		PrintWriter out = response.getWriter();//Îñ±Ø·ÅÔÚ×îºó
+		request.setCharacterEncoding("UTF-8");//ç’å‰§ç–†ç€µç‘°î…¹é´é£î¬ç’‡é”‹çœ°æ©æ¶œî”‘é–²å¶†æŸŠç¼‚æ «çˆœé¨å‹­ç´ªé®ä½µï¿½
+		response.setCharacterEncoding("UTF-8");//é¸å›§ç•¾ç€µè§„æ¹‡é”â€³æ«’éå¶…ç°²æ©æ¶œî”‘é–²å¶†æŸŠç¼‚æ «çˆœé¨å‹­ç´ªé®ä½µï¿½
+		response.addHeader("Access-Control-Allow-Origin", "*");//ç’ºã„¥ç…™
+		PrintWriter out = response.getWriter();//é”â€³ç¹€é€æƒ§æ¹ªéˆï¿½æ‚—
 		
 
-		//µÚÒ»²½£¬È¡Êı¾İ
+		//ç»—îƒ¿ç«´å§ãƒ¯ç´é™æ ¨æšŸé¹ï¿½
 		String PaperIDStr=request.getParameter("PaperID");
 		int PaperID = 0;
 		try {
 			PaperID = Integer.parseInt(PaperIDStr);
 		} catch (Exception e) {
-			out.print("{\"errcode\":101,\"errmsg\":\"ÊÔ¾íIDĞÅÏ¢ÓĞÎó\"}");
+			out.print("{\"errcode\":101,\"errmsg\":\"è¯•å·IDä¿¡æ¯æœ‰è¯¯\"}");
 			out.flush();
 			out.close();
 			return;
@@ -86,7 +86,7 @@ public class QuestionGetByPaper extends HttpServlet {
 		
 		
 		if (DBfindPaper_result == null){
-			String printString =  "{\"errcode\":101,\"errmsg\":\"ÕÒ²»µ½ÊÔ¾í\"}";
+			String printString = "{\"errcode\":101,\"errmsg\":\"æ‰¾ä¸åˆ°è¯•å·\"}";
 			out.print(printString);
 			out.flush();
 			out.close();
@@ -96,10 +96,10 @@ public class QuestionGetByPaper extends HttpServlet {
 		System.out.println(questionListStr);
 
 		
-		String[] questionList = questionListStr.split("@@");//¶ªÆú¿Õ×Ö·û´®
+		String[] questionList = questionListStr.split("@@");//æ¶“ãˆ ç´”ç»Œå“„ç“§ç»—ï¸¿è¦†
 
 		if(questionList.length<2){
-			String printString =  "{\"errcode\":101,\"errmsg\":\"ÊÔÌâ²»×ã\"}";
+			String printString =  "{\"errcode\":101,\"errmsg\":\"è¯•é¢˜ä¸è¶³\"}";
 			out.print(printString);
 			out.flush();
 			out.close();
@@ -111,7 +111,7 @@ public class QuestionGetByPaper extends HttpServlet {
 		
 		
 		if (DBfindQuestions_result.isEmpty()){
-			out.print("{\"errcode\":100,\"errmsg\":\"ËÑË÷²»µ½Ìâ¿â\"}");
+			out.print("{\"errcode\":100,\"errmsg\":\"æœç´¢ä¸åˆ°é¢˜åº“\"}");
 			out.flush();
 			out.close();
 			return;
@@ -147,7 +147,7 @@ public class QuestionGetByPaper extends HttpServlet {
 	}
 	
 	public PaperModel DBfindPaper(int PaperID) {
-		System.out.println("Íê³ÉÖ´ĞĞDBfindPaper");
+		System.out.println("å®Œæˆæ‰§è¡ŒDBfindPaper");
 		String sql="SELECT * FROM  Paper " +
 				"WHERE PaperID=? ";
 		Connection conn=DBConn.getConnection();
@@ -178,7 +178,7 @@ public class QuestionGetByPaper extends HttpServlet {
 	
 	
 	public ArrayList<QuestionModel> DBfindQuestions(String[] questionList) {
-		System.out.println("Íê³ÉÖ´ĞĞDBfindQuestions ³¤¶È£º"+questionList.length);
+		System.out.println("å®Œæˆæ‰§è¡ŒDBfindQuestions é•¿åº¦ï¼š"+questionList.length);
 		int questionCount = questionList.length;
 		String tempStr = "";
 		  for(int i=0;i< questionCount;i++ ){
@@ -188,13 +188,13 @@ public class QuestionGetByPaper extends HttpServlet {
 				  tempStr = tempStr + ",?";
 			  }
 		  }
-		String sql="SELECT Question.QuestionID,Question.Type,Content,Choices,Image,Tag,Share,Answerkey,Difficulty,UserID,Answer,R_question_kp.kpID,Description,R_question_kp.CreateAt FROM  Question,Knowledge_point,R_question_kp WHERE Question.QuestionID IN ("+tempStr+") and Question.QuestionID=R_question_kp.QuestionID and R_question_kp.KpID=Knowledge_point.KpID";
+	 String sql="SELECT Question.QuestionID,Question.Type,Content,Choices,Image,Tag,Share,Answerkey,Difficulty,UserID,Answer,R_question_kp.kpID,Description,R_question_kp.CreateAt FROM  Question,Knowledge_point,R_question_kp WHERE Question.QuestionID IN ("+tempStr+") and Question.QuestionID=R_question_kp.QuestionID and R_question_kp.KpID=Knowledge_point.KpID";
 	
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String errorString = "Êı¾İ¿â²Ù×÷Òì³£";
+		String errorString =  "æ•°æ®åº“æ“ä½œå¼‚å¸¸";
 
 
 		ArrayList<QuestionModel> resultList = new ArrayList<QuestionModel>();
@@ -228,6 +228,7 @@ public class QuestionGetByPaper extends HttpServlet {
 				questionModel_temp.setCreateAt(rs.getString("CreateAt"));
 				questionModel_temp.setKnowledgeid(rs.getInt("KpID"));
 				questionModel_temp.setKnowledgepoint(rs.getString("Description"));
+              
 				resultList.add(questionModel_temp);
 			}
 			conn.close();

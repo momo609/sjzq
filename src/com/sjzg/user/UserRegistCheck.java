@@ -88,7 +88,7 @@ public class UserRegistCheck extends HttpServlet {
 		UserModel DBfindUserByPhone_result = DBfindUserByPhone(MobilePhone);
 		
 		if (DBfindUser_result != null ){
-			out.print("{\"errcode\":101,\"errmsg\":\"学号已存在\"}");
+			out.print("{\"errcode\":101,\"errmsg\":\"学号已存在,请联系客服！\"}");
 			out.flush();
 			out.close();
 			return;

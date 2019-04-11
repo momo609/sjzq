@@ -10,7 +10,7 @@ public class PaperModel {
 	private String CreateAt;
 	private String UpdateAt;
 	
-	
+	private String ExtendContent;//方便传输的扩展内容
 	public String validate() 
 	{
 		if(Title==null||Title.equals(""))
@@ -87,6 +87,16 @@ public class PaperModel {
 	}
 	public void setUpdateAt(String updateAt) {
 		UpdateAt = updateAt;
+	}
+
+
+	public String getExtendContent() {
+		return ExtendContent;
+	}
+
+
+	public void setExtendContent(String extendContent) {
+		ExtendContent = extendContent;
 	}
 	
 	

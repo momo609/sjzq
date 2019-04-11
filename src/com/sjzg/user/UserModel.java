@@ -37,9 +37,9 @@ public class UserModel {
 		{
 			return "Password Error";
 		}
-		if(Role==null||Role.equals(""))
+		if(Role==null||(!Role.equals("teacher")))
 		{
-			return "Role Error";
+			Role = "student";
 		}
 		if(MobilePhone==null||MobilePhone.equals(""))
 		{

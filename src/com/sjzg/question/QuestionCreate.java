@@ -79,7 +79,7 @@ public class QuestionCreate extends HttpServlet {
 		String Tag = request.getParameter("Tag");
 		String UserID = request.getParameter("UserID");
 		String ShareStr = request.getParameter("Share");
-		String knowledgepoint=request.getParameter("knowledgepoint");
+		
 		
 		int Type = 0;
 		try {
@@ -116,7 +116,7 @@ public class QuestionCreate extends HttpServlet {
 		questionModel.setDifficulty(0);
 		questionModel.setUserID(UserID);
 		questionModel.setShare(Share);
-		questionModel.setKnowledgepoint(knowledgepoint);
+		
 		//第二步，检查数据是否有误
 		if (!questionModel.validate().equals("ok")){
 			out.print("{\"errcode\":101,\"errmsg\":\""+questionModel.validate()+"\"}");
@@ -126,13 +126,7 @@ public class QuestionCreate extends HttpServlet {
 		}
 		
 		
-		String DBcreateQuestion_result = null;
-		try {
-			DBcreateQuestion_result = DBcreateQuestion(questionModel);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String DBcreateQuestion_result = DBcreateQuestion(questionModel);
 		
 		if (!DBcreateQuestion_result.equals("ok")) {
 			out.print("{\"errcode\":101,\"errmsg\":\"系统异常\"}");
@@ -150,88 +144,21 @@ public class QuestionCreate extends HttpServlet {
 	
 		
 	}
-    public String InsertkpTOq(QuestionModel questionModel) throws SQLException
-    {
-    	String errorString = "数据库操作异常";
-    	Date nowDate = new Date();
-		java.sql.Timestamp nowTimestamp = new java.sql.Timestamp(nowDate.getTime());
-    	String findkp="SELECT * FROM Knowledge_point WHERE Description=?";
-    	Connection conn = DBConn.getConnection();;
-		PreparedStatement ps = conn.prepareStatement(findkp);
-		ps.setString(1, questionModel.getKnowledgepoint());
-		ResultSet rs =ps.executeQuery();
-		int influence=0;//影响的行数
-		if(rs.next())
-		{
-			questionModel.setKnowledgeid(rs.getInt("KpID"));
-		}
-		try
-		{
-			String insertkptoq="INSERT INTO R_question_kp(QuestionID,KpID,CreateAt,UpdateAt) VALUES(?,?,?,?)";
-		    conn = DBConn.getConnection();;
-		    ps = conn.prepareStatement(insertkptoq);
-		    ps.setInt(1, questionModel.getQuestionID());
-		    ps.setInt(2, questionModel.getKnowledgeid());
-		    ps.setTimestamp(3, nowTimestamp);
-		    ps.setTimestamp(4, nowTimestamp);
-		    ps.executeUpdate();
 
-		     conn.close();
-	    } catch (SQLException e) {
-		     e.printStackTrace();
-		     errorString+=e.getLocalizedMessage();
-	    }finally {
-	        if (rs != null) {
-	           try {
-	              rs.close();
-	              } catch (SQLException e) { /* ignored */}
-	        }
-	       if (ps != null) {
-	          try {
-	              ps.close();
-	           } catch (SQLException e) { /* ignored */}
-	       }
-	       if (conn != null) {
-	           try {
-	            conn.close();
-	           } catch (SQLException e) { /* ignored */}
-	        }
-	    }
-		if(influence<1)
-		{
-			return errorString;
-		}
-		else 
-		{
-			return "ok";
-		}
-    }
 	
 	
-	public String DBcreateQuestion(QuestionModel questionModel) throws SQLException {
+	public String DBcreateQuestion(QuestionModel questionModel) {
 		System.out.println("执行DBcreateQuestion");
 		String sql="INSERT INTO Question(Type,Content,Choices,Answer,Answerkey,Image,Tag,Difficulty,Share,UserID,CreateAt,UpdateAt) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-		String findkp="SELECT * FROM Knowledge_point WHERE Description=?";
+		int influence=0;//影响的行数
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		String errorString = "数据库操作异常";
 		Date nowDate = new Date();
 		java.sql.Timestamp nowTimestamp = new java.sql.Timestamp(nowDate.getTime());
-		int influence=0;//影响的行数
-		Connection conn = DBConn.getConnection();;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		ps=conn.prepareStatement(findkp);
-		ps.setString(1, questionModel.getKnowledgepoint());
-		rs=ps.executeQuery();
-		if(!rs.next())
-		{
-			String createkp="INSERT INTO Knowledge_point(Description,CreateAt,UpdateAt) VALUES(?,?,?)";
-			ps=conn.prepareStatement(createkp);
-			ps.setString(1, questionModel.getKnowledgepoint());
-			ps.setTimestamp(2, nowTimestamp);
-			ps.setTimestamp(3, nowTimestamp);
-		}
-		InsertkpTOq(questionModel);
 		try {
+			 conn=DBConn.getConnection();
 			 ps=conn.prepareStatement(sql);
 
 			ps.setInt(1, questionModel.getType());

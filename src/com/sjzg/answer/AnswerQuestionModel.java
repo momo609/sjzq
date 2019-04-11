@@ -5,7 +5,7 @@ public class AnswerQuestionModel {
 	private int QuestionID;
 	
 	//Answer Ä£ÐÍ
-	private int TimeUsed;
+	private float TimeUsed;
 	private String Track;
 	private float Grade;
 	private int UnfocusDuration;
@@ -29,10 +29,10 @@ public class AnswerQuestionModel {
 	private String Image;
 	private String Tag;
 
-	public int getTimeUsed() {
+	public float getTimeUsed() {
 		return TimeUsed;
 	}
-	public void setTimeUsed(int timeUsed) {
+	public void setTimeUsed(float timeUsed) {
 		TimeUsed = timeUsed;
 	}
 	public String getTrack() {

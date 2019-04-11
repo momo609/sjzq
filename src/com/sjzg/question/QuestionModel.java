@@ -35,7 +35,7 @@ public class QuestionModel {
 		this.knowledgeid = knowledgeid;
 	}
 
-
+	
 	public String validate() 
 	{
 		if(Content==null||Content.equals(""))

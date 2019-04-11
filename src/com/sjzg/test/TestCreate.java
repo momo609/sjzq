@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sjzg.database.DBConn;
-import com.sjzg.paper.PaperModel;
 
 public class TestCreate extends HttpServlet {
 
@@ -120,6 +121,19 @@ public class TestCreate extends HttpServlet {
 		testModel.setTestName(TestName);
 		testModel.setTestTime(TestTime);
 		testModel.setState("open");
+		
+		//在考试结束后调用模型训练
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				//这里是调用方法
+			}
+		}, Long.parseLong(EndTime)-Long.parseLong(StartTime));
+		
+		
+		
 		
 		//第二步，检查数据是否有误
 		if (!testModel.validate().equals("ok")){
