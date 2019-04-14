@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name></display-name>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DBconnect</servlet-name>
+    <servlet-class>com.sjzg.database.DBconnect</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserRegist</servlet-name>
+    <servlet-class>com.sjzg.user.UserRegist</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserLogin</servlet-name>
+    <servlet-class>com.sjzg.user.UserLogin</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserGetInfo</servlet-name>
+    <servlet-class>com.sjzg.user.UserGetInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserInfoSet</servlet-name>
+    <servlet-class>com.sjzg.userinfo.UserInfoSet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserCheckToken</servlet-name>
+    <servlet-class>com.sjzg.user.UserCheckToken</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserInfoGet</servlet-name>
+    <servlet-class>com.sjzg.userinfo.UserInfoGet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CourseGetByStudent</servlet-name>
+    <servlet-class>com.sjzg.course.CourseGetByStudent</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CourseCreate</servlet-name>
+    <servlet-class>com.sjzg.course.CourseCreate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CourseGetByTeacher</servlet-name>
+    <servlet-class>com.sjzg.course.CourseGetByTeacher</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CourseGetByID</servlet-name>
+    <servlet-class>com.sjzg.course.CourseGetByID</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CourseIsJoin</servlet-name>
+    <servlet-class>com.sjzg.course.CourseIsJoin</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CourseJoin</servlet-name>
+    <servlet-class>com.sjzg.course.CourseJoin</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionCreate</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionCreate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionQueryAll</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionQueryAll</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionGetByID</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionGetByID</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperCreate</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperCreate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperGetByID</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperGetByID</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TestCreate</servlet-name>
+    <servlet-class>com.sjzg.test.TestCreate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TestGetByID</servlet-name>
+    <servlet-class>com.sjzg.test.TestGetByID</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TestGetByUser</servlet-name>
+    <servlet-class>com.sjzg.test.TestGetByUser</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TestQuestions</servlet-name>
+    <servlet-class>com.sjzg.test.TestQuestions</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionGetByPaper</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionGetByPaper</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AnswerCreate</servlet-name>
+    <servlet-class>com.sjzg.answer.AnswerCreate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionGetByUser</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionGetByUser</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionUpdateShare</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionUpdateShare</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionShareUser</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionShareUser</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionFindShare</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionFindShare</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionCleanShare</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionCleanShare</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionGetByShare</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionGetByShare</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionDelete</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionDelete</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperGetByUser</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperGetByUser</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperDelete</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperDelete</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CourseMemberGet</servlet-name>
+    <servlet-class>com.sjzg.course.CourseMemberGet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CourseMemberManage</servlet-name>
+    <servlet-class>com.sjzg.course.CourseMemberManage</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TokenCheck</servlet-name>
+    <servlet-class>com.sjzg.user.TokenCheck</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserGet</servlet-name>
+    <servlet-class>com.sjzg.user.UserGet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserUpdateInfo</servlet-name>
+    <servlet-class>com.sjzg.user.UserUpdateInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TestGetByCourse</servlet-name>
+    <servlet-class>com.sjzg.test.TestGetByCourse</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserForgot</servlet-name>
+    <servlet-class>com.sjzg.user.UserForgot</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserReset</servlet-name>
+    <servlet-class>com.sjzg.user.UserReset</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AnswerGetByTest</servlet-name>
+    <servlet-class>com.sjzg.answer.AnswerGetByTest</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AnswerGetByID</servlet-name>
+    <servlet-class>com.sjzg.answer.AnswerGetByID</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TestUpdateState</servlet-name>
+    <servlet-class>com.sjzg.test.TestUpdateState</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TestDelete</servlet-name>
+    <servlet-class>com.sjzg.test.TestDelete</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserRegistCheck</servlet-name>
+    <servlet-class>com.sjzg.user.UserRegistCheck</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserResetPassword</servlet-name>
+    <servlet-class>com.sjzg.user.UserResetPassword</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserResetMobileCheck</servlet-name>
+    <servlet-class>com.sjzg.user.UserResetMobileCheck</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserResetMobile</servlet-name>
+    <servlet-class>com.sjzg.user.UserResetMobile</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ReadExcel</servlet-name>
+    <servlet-class>com.sjzg.tool.ReadExcel</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CourseUpdate</servlet-name>
+    <servlet-class>com.sjzg.course.CourseUpdate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CourseDelete</servlet-name>
+    <servlet-class>com.sjzg.course.CourseDelete</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TestGetByTeacher</servlet-name>
+    <servlet-class>com.sjzg.test.TestGetByTeacher</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RankByTest</servlet-name>
+    <servlet-class>com.sjzg.rank.RankByTest</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RankByTime</servlet-name>
+    <servlet-class>com.sjzg.rank.RankByTime</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RankByMistake</servlet-name>
+    <servlet-class>com.sjzg.rank.RankByMistake</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>BehaviourCreate</servlet-name>
+    <servlet-class>com.sjzg.behaviour.BehaviourCreate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperGetByShare</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperGetByShare</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperShareAdd</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperShareAdd</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperShareGet</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperShareGet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PaperShareClean</servlet-name>
+    <servlet-class>com.sjzg.paper.PaperShareClean</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionCollectionAdd</servlet-name>
+    <servlet-class>com.sjzg.question.QuestionCollectionAdd</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>BehaviourCreateV2</servlet-name>
+    <servlet-class>com.sjzg.behaviour.BehaviourCreateV2</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>KG_Recommend</servlet-name>
+    <servlet-class>com.sjzg.answer.KG_Recommend</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>DBconnect</servlet-name>
+    <url-pattern>/servlet/DBconnect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserRegist</servlet-name>
+    <url-pattern>/servlet/UserRegist</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserLogin</servlet-name>
+    <url-pattern>/servlet/UserLogin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserGetInfo</servlet-name>
+    <url-pattern>/servlet/UserGetInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserInfoSet</servlet-name>
+    <url-pattern>/servlet/UserInfoSet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserCheckToken</servlet-name>
+    <url-pattern>/servlet/UserCheckToken</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserInfoGet</servlet-name>
+    <url-pattern>/servlet/UserInfoGet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseGetByStudent</servlet-name>
+    <url-pattern>/servlet/CourseGetByStudent</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseCreate</servlet-name>
+    <url-pattern>/servlet/CourseCreate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseGetByTeacher</servlet-name>
+    <url-pattern>/servlet/CourseGetByTeacher</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseGetByID</servlet-name>
+    <url-pattern>/servlet/CourseGetByID</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseIsJoin</servlet-name>
+    <url-pattern>/servlet/CourseIsJoin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseJoin</servlet-name>
+    <url-pattern>/servlet/CourseJoin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionCreate</servlet-name>
+    <url-pattern>/servlet/QuestionCreate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionQueryAll</servlet-name>
+    <url-pattern>/servlet/QuestionQueryAll</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionGetByID</servlet-name>
+    <url-pattern>/servlet/QuestionGetByID</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperCreate</servlet-name>
+    <url-pattern>/servlet/PaperCreate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperGetByID</servlet-name>
+    <url-pattern>/servlet/PaperGetByID</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestCreate</servlet-name>
+    <url-pattern>/servlet/TestCreate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestGetByID</servlet-name>
+    <url-pattern>/servlet/TestGetByID</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestGetByUser</servlet-name>
+    <url-pattern>/servlet/TestGetByUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestQuestions</servlet-name>
+    <url-pattern>/servlet/TestQuestions</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionGetByPaper</servlet-name>
+    <url-pattern>/servlet/QuestionGetByPaper</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AnswerCreate</servlet-name>
+    <url-pattern>/servlet/AnswerCreate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionGetByUser</servlet-name>
+    <url-pattern>/servlet/QuestionGetByUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionUpdateShare</servlet-name>
+    <url-pattern>/servlet/QuestionUpdateShare</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionShareUser</servlet-name>
+    <url-pattern>/servlet/QuestionShareUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionFindShare</servlet-name>
+    <url-pattern>/servlet/QuestionFindShare</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionCleanShare</servlet-name>
+    <url-pattern>/servlet/QuestionCleanShare</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionGetByShare</servlet-name>
+    <url-pattern>/servlet/QuestionGetByShare</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionDelete</servlet-name>
+    <url-pattern>/servlet/QuestionDelete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperGetByUser</servlet-name>
+    <url-pattern>/servlet/PaperGetByUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperDelete</servlet-name>
+    <url-pattern>/servlet/PaperDelete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseMemberGet</servlet-name>
+    <url-pattern>/servlet/CourseMemberGet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseMemberManage</servlet-name>
+    <url-pattern>/servlet/CourseMemberManage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TokenCheck</servlet-name>
+    <url-pattern>/servlet/TokenCheck</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserGet</servlet-name>
+    <url-pattern>/servlet/UserGet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserUpdateInfo</servlet-name>
+    <url-pattern>/servlet/UserUpdateInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestGetByCourse</servlet-name>
+    <url-pattern>/servlet/TestGetByCourse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserForgot</servlet-name>
+    <url-pattern>/servlet/UserForgot</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserReset</servlet-name>
+    <url-pattern>/servlet/UserReset</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AnswerGetByTest</servlet-name>
+    <url-pattern>/servlet/AnswerGetByTest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AnswerGetByID</servlet-name>
+    <url-pattern>/servlet/AnswerGetByID</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestUpdateState</servlet-name>
+    <url-pattern>/servlet/TestUpdateState</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestDelete</servlet-name>
+    <url-pattern>/servlet/TestDelete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserRegistCheck</servlet-name>
+    <url-pattern>/servlet/UserRegistCheck</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserResetPassword</servlet-name>
+    <url-pattern>/servlet/UserResetPassword</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserResetMobileCheck</servlet-name>
+    <url-pattern>/servlet/UserResetMobileCheck</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserResetMobile</servlet-name>
+    <url-pattern>/servlet/UserResetMobile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ReadExcel</servlet-name>
+    <url-pattern>/servlet/ReadExcel</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseUpdate</servlet-name>
+    <url-pattern>/servlet/CourseUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseDelete</servlet-name>
+    <url-pattern>/servlet/CourseDelete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestGetByTeacher</servlet-name>
+    <url-pattern>/servlet/TestGetByTeacher</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RankByTest</servlet-name>
+    <url-pattern>/servlet/RankByTest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RankByTime</servlet-name>
+    <url-pattern>/servlet/RankByTime</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RankByMistake</servlet-name>
+    <url-pattern>/servlet/RankByMistake</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BehaviourCreate</servlet-name>
+    <url-pattern>/servlet/BehaviourCreate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperGetByShare</servlet-name>
+    <url-pattern>/servlet/PaperGetByShare</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperShareAdd</servlet-name>
+    <url-pattern>/servlet/PaperShareAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperShareGet</servlet-name>
+    <url-pattern>/servlet/PaperShareGet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PaperShareClean</servlet-name>
+    <url-pattern>/servlet/PaperShareClean</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionCollectionAdd</servlet-name>
+    <url-pattern>/servlet/QuestionCollectionAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BehaviourCreateV2</servlet-name>
+    <url-pattern>/servlet/BehaviourCreateV2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>KG_Recommend</servlet-name>
+    <url-pattern>/servlet/KG_Recommend</url-pattern>
+  </servlet-mapping>	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
